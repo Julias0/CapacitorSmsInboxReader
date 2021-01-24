@@ -1,5 +1,6 @@
 
   <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.dhar.smsinboxreader.smsinboxreader">
+    <uses-permission android:name="android.permission.READ_SMS" />
   </manifest>
   
