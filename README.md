@@ -20,6 +20,12 @@ Check for READ SMS permission before actually doing it - otherwise this throws a
 Sample code - 
 
 ```
+  import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
+  const { SmsInboxReader } = Plugins;
+
+  ....
+
   async readMessages() {
     await this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.READ_SMS]);
     const isPermitted = this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS);
