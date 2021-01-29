@@ -3,6 +3,7 @@ package com.dhar.smsinboxreader;
 import android.Manifest;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.Telephony;
 
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
@@ -14,6 +15,7 @@ import com.getcapacitor.PluginMethod;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @NativePlugin(
         permissions = {
@@ -36,11 +38,16 @@ public class SmsInboxReader extends Plugin {
 
         ArrayList smsArray = new ArrayList<JSObject>();
 
+
+
         if (cursor.moveToFirst()) {
             for (int i = 0; i < cursor.getCount(); i++) {
                 JSObject currentSmsObject = new JSObject();
-                currentSmsObject.put("from",  cursor.getString(cursor.getColumnIndexOrThrow("address")));
-                currentSmsObject.put("message", cursor.getString(cursor.getColumnIndexOrThrow("body")));
+                currentSmsObject.put("from",  cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Sms.ADDRESS)));
+                currentSmsObject.put("message", cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Sms.BODY)));
+                Date date = new Date(Long.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Sms.DATE))));
+                currentSmsObject.put("createdAt", date.toString());
+                currentSmsObject.put("id", cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Sms._ID)));
                 smsArray.add(currentSmsObject);
                 cursor.moveToNext();
             }
