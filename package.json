@@ -1,6 +1,6 @@
 {
   "name": "sms-inbox-reader",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "plugin to access messages from sms inbox",
   "main": "dist/plugin.js",
   "module": "dist/esm/index.js",
